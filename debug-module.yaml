@@ -1,0 +1,10 @@
+---
+- name: print message on terminal console
+  hosts: all
+  vars:
+   fruit: "banana"
+  tasks: 
+   - name: print debug message on terminal 
+     ansible.builtin.debug:
+      msg: "checking the {{ fruit }} in the basket"
+      verbosity: 2 

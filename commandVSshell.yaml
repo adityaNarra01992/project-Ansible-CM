@@ -1,0 +1,12 @@
+---
+- name: command module vs shell module
+  hosts: all
+  tasks: 
+   - name: execute the command module on host machine
+     command: uptime
+     register: command_output
+
+   - name: command output
+     debug:
+      var: command_output.stdout_lines
+

@@ -1,0 +1,20 @@
+---
+- name: break string in diff lines of the playbook
+  hosts: all
+  vars:
+   variable1: |-
+    exactly you see
+    will appear these three line
+    in output stdout
+   variable2: >-
+    this is really a
+    single line of text
+    despite appearances
+  tasks: 
+   - name: print the debug message with varibale1
+     ansible.builtin.debug:
+      msg: "{{ variable1.split('\n') }}"
+
+   - name: print the debug message with varibale2
+     ansible.builtin.debug:
+      var: variable2

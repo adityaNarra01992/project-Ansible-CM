@@ -1,0 +1,15 @@
+---
+- name: stop executing playbook for certain amount of time
+  hosts: all
+  vars_files:
+   - /home/ansible-admin/playbooks/vars.yaml 
+  tasks: 
+   - name: install nginx with the ansible playbook execution
+     yum: name={{ package }} state=present update_cache=yes
+   - name: pause the ansible playbook execution
+     pause: seconds={{ wait_seconds }}
+   - name: start the service in nginx using ansible
+     service: name={{ package }} state=started
+
+   - name: deploy java application
+     copy: src=/tmp/app.jar dest=/opt/app.jar backup=yes

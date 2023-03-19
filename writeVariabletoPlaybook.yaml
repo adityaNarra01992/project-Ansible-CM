@@ -1,0 +1,24 @@
+---
+- name: write the variable to file in ansible 
+  hosts: all
+  vars: 
+   fruit: "Apple"
+   output: "output.txt"
+  tasks:
+   - name: write to file
+     ansible.builtin.copy:
+      content: "{{ fruit }}"
+      dest: "{{ output }}"
+
+
+- name: template module demo
+  hosts: all
+  vars: 
+   fruit: "banana"
+   output: "output-banana.txt"
+  tasks:
+   - name: write to a file
+     ansible.builtin.template:
+      src: "mytemplate.j2"
+      dest: "{{ output }}"   
+
