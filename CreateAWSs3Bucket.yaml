@@ -1,0 +1,11 @@
+---
+- name: Create a S3 bucket in AWS console using ansible playbook
+  hosts: localhost
+  tasks: 
+   - name: Create S3 bucket
+     amazon.aws.s3_bucket:
+      name: appS3_bucket
+      state: present
+      versioning: true
+      policy: "{{ lookup('file','bucketAcl.json') }}" #write custom policy and assing name as per your requirement
+
