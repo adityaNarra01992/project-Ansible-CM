@@ -1,0 +1,13 @@
+---
+# tasks file for app-version-v1
+
+- name: Download Jar from Jfrom URL
+  get_url: url=file:///tmp/app.jar dest=/app/app.jar
+
+- name: Installjava on Prod server
+  yum: name=java-11 state=present update_cache=yes
+  delegate_to: <node-hostname>
+
+
+- name: execute the jar file with hava package
+  command: java -jar /app/app.jar
