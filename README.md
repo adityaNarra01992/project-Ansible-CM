@@ -20,3 +20,9 @@ IMP BUILD-BLOCKS ANSIBLE:
 
 -> Inventory file is the place where we put all the details of host machines. The default location of the inventory file is (/etc/ansible/hosts)
 -> If you are using the custom inventory file you should define the path of inventory in ansible.cfg or pass inventory as command-line argument
+
+
+ROLES:
+=====
+
+Are the best ways to confuration automation
