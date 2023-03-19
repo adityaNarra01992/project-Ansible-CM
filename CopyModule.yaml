@@ -1,0 +1,9 @@
+---
+- name: copy files from one server to another
+  hosts: all
+  vars: 
+   filename: "/tmp/tomcat-users.xml"
+   remoteServerFile: "/tmp/tomcat-users.xml"
+  tasks:
+   - name: copy files from one server to another
+     copy: src={{ filename }} dest={{ remoteServerFile }}

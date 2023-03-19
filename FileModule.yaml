@@ -1,0 +1,9 @@
+--- 
+- name: create file on remote servers
+  hosts: all
+  vars: 
+   filename: "/tmp/files.xml"
+  tasks: 
+   - name: create file on remote servers
+     file: name={{ filename }} state=touch mode=755 owner=ansible-admin
+   
