@@ -1,0 +1,52 @@
+---
+- name: install teamcity
+  hosts: localhost
+  become: yes
+  become_method: sudo
+  vars_files:
+   - /home/aditya/ansible-play/teamcity_vars.yaml
+  tasks:
+   - name: create a teamcity user
+     user:
+      name: "{{ username }}"
+      state: present
+      generate_ssh_key: yes
+      home: /home/{{ username }}
+
+   - name: install openjdk
+     apt:
+      name: openjdk-11-jre
+      state: present
+      update_cache: yes
+
+   - name: check java version
+     command:
+      cmd: java -version
+     ignore_errors: yes
+
+   - name: download teamcity from url
+     unarchive:
+      src: "{{ download_url }}"
+      dest: "{{ download_path }}"
+      remote_src: yes
+     tags: download
+
+
+   - name: changing owner ship
+     file:
+      path: "{{ user_home }}"
+      owner: "{{ username }}"
+      group: "{{ username }}"
+      recurse: yes
+      state: directory
+
+   - name: add teamcity to init scripts
+     template:
+      src: teamcity.sh.j2
+      dest: /etc/init.d/teamcity
+      mode: 775
+
+   - name: start teamcity
+     service:
+      name: teamcity
+      state: started
